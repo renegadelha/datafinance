@@ -1,0 +1,28 @@
+.banner{
+    height: 75px;
+    margin: 0px -10px 10px;
+    background-color: rgb(66, 196, 247);
+    border-radius: 2px;
+
+}
+.banner1{
+    height: 50px;
+    margin: 0px -10px 10px;
+    background-color: rgb(20, 18, 135);
+    border-radius: 2px;
+
+}
+
+h1 {
+    color: white;
+    font-size: 45px;
+    margin: 5px 10px 10px;
+}
+
+h3 {
+    display: block;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    margin: 5px 10px 10px;
+}
