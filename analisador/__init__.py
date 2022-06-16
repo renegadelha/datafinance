@@ -305,33 +305,20 @@ def lerCsv(path):
     return dados
 
 
-def processarAnalise(dados):
+def processarAnalise(dados, option):
 
     myStocks = True
 
-    if not myStocks:
-        dados.drop(dados[dados[' LIQUIDEZ MEDIA DIARIA'] < 500000].index, inplace=True)
-        dados.drop(dados[dados['P/L'] <= 0].index, inplace=True)
-        dados.drop(dados[dados[' VPA'] <= 0].index, inplace=True)
-        dados.drop(dados[dados[' LPA'] <= 0].index, inplace=True)
-        dados.drop(dados[dados['DY'] < 1].index, inplace=True)
-        # dados.drop(dados[dados['ROE'] < 5].index, inplace=True)
-        dados.drop(dados[dados['EV/EBIT'] <= 0].index, inplace=True)
-        dados.drop(dados[dados['EV/EBIT'] > 30].index, inplace=True)
-        dados.drop(dados[dados['PRECO'] <= 0].index, inplace=True)
-
-        dados3 = dados
+    if option ==1:
+        empresasdiv = {'VBBR3': 1.3, 'BBSE3': 1.7, 'PSSA3': 1.3}
+    elif option == 2:
+        empresasdiv = {'VBBR3': 1.3, 'BBSE3': 1.7, 'PSSA3': 1.3, 'BRSR6': 0.7, 'BBAS3': 2.2, 'ITSA4': 0.6}
+    elif option == 3:
+        empresasdiv = {'VBBR3': 1.3, 'BBSE3': 1.7, 'PSSA3': 1.3, 'BRSR6': 0.7, 'BBAS3': 2.2, 'ITSA4': 0.6, 'EGIE3': 2.5, 'ENBR3': 1.3, 'ALUP11': 1.5}
     else:
-        empresasdiv = {'VBBR3': 1.3, 'BBSE3': 1.7, 'PSSA3': 1.3
-        , 'BRSR6': 0.7, 'BBAS3': 2.2, 'ITSA4': 0.6
-        , 'EGIE3': 2.5, 'ENBR3': 1.3, 'ALUP11': 1.5
-            #, 'TAEE11': 2.5, 'VIVT3': 3, 'VALE3': 4
-                       # 'SIMH3':0.1,'JBSS3':1,'JHSF3':0.16,
-                       }
+        empresasdiv = {'VBBR3': 1.3, 'BBSE3': 1.7, 'PSSA3': 1.3}
 
-        # empresasdiv = {'TAEE11':2.3,'VBBR3':2, 'EGIE3':2.5,'ITSA4':0.7,'ENBR3':1.6, 'BBSE3':1.8,'JHSF3':0.15,'BRSR6':0.7,'BBAS3':2.2,'ALUP11':1.5, 'CAML3':0.4}
-
-        dados3 = dados[dados.TICKER.isin(list(empresasdiv.keys()))]
+    dados3 = dados[dados.TICKER.isin(list(empresasdiv.keys()))]
 
     if not myStocks:
         filtrados = ticketsMaiorLiquidez(dados3)
