@@ -38,17 +38,15 @@ server = app.server #server heroku reconhecer a app
 
 actual_dir = pathlib.Path().absolute()
 
-path = f'{actual_dir}/data/statusinvest02062022.csv'
-tdiv = gerarTdiv()
+path = f'{actual_dir}/data/statusinvest16062022.csv'
+tdiv = gerarTdiv(1)
 padrao = pd.DataFrame()
 figura = gv.generateGraphMonth()
-time = datetime.datetime.now()
 
 def serve_layout():
     global tdiv
     global padrao
     global figura
-    global time
 
     padrao = viewTableAll(tdiv)
     fig = px.line(figura)
@@ -62,7 +60,6 @@ def serve_layout():
 
                  )
         ,
-        html.Div(children=[html.H4(children=str(time))]),
 
         html.Div([html.H3(children='Top {}'.format(len(tableAll)))]
                  , className='banner1'),
@@ -97,10 +94,23 @@ def serve_layout():
                  , className='banner1'),
 
         dcc.Graph(figure=fig),
+        html.Div([html.H3(children='Admin')]
+                 , className='banner1'),
         html.Div(['Senha:',
                   dcc.Input(id='inputSenha', value='******', type='password'),
                   html.Button(id='botaoSenha', n_clicks=0, children='Atualizar Dados')
-                  ]),
+                  ,
+                  html.Br(),
+                  dcc.RadioItems(
+                      ['1', '2', '3'],
+                      '1',
+                      id='option_tdiv',
+                      inline=True
+                  )
+                  ])
+
+        ,
+
         html.Div(id='hiddendiv', style={'display': 'none'})
 
     ])
@@ -112,15 +122,16 @@ app.layout = serve_layout
     Output('hiddendiv','children'),
     Input('botaoSenha', 'n_clicks'),
     State('inputSenha', 'value'),
+    State('option_tdiv', 'value'),
     prevent_initial_call=True
 
 )
-def update_tdiv(n_clicks, value):
+def update_tdiv_and_graph(n_clicks, value, radiovalue):
     global tdiv
-    global time
+    global figura
     if value == 'rnsg':
-        tdiv = gerarTdiv()
-        time = datetime.datetime.now()
+        tdiv = gerarTdiv(int(radiovalue))
+        figura = gv.generateGraphMonth()
 
     elif len(value) == 0:
         raise exceptions.PreventUpdate
@@ -179,5 +190,5 @@ if __name__ == '__main__':
     )
 ])
 
-        html.H2(children=str(datetime.datetime.now())),
+    html.Div(children=[html.H4(children=str(time))]),
 '''
