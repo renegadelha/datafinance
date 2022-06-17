@@ -39,7 +39,7 @@ server = app.server #server heroku reconhecer a app
 actual_dir = pathlib.Path().absolute()
 
 path = f'{actual_dir}/data/statusinvest16062022.csv'
-tdiv = gerarTdiv(1)
+tdiv = gerarTdiv(3)
 padrao = pd.DataFrame()
 figura = gv.generateGraphMonth()
 
