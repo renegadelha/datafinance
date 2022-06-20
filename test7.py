@@ -27,7 +27,7 @@ def viewTableAll(tdiv):
 def viewTableTop(tdiv):
     tdiv.sort_values(by=['margemGordon'], ascending=False, inplace=True)
 
-    return gerarTable(tdiv.head(len(tdiv) // 1.5), 1000)
+    return gerarTable(tdiv.head(int(len(tdiv) // 1.5)), 1000)
 
 
 app = Dash(__name__)
