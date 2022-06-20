@@ -24,7 +24,7 @@ def viewTableAll(tdiv):
     return gerarTable(tdiv, 1000)
 
 
-def viewTableTop(tdiv: pandas.core.frame.DataFrame):
+def viewTableTop(tdiv):
     tdiv.sort_values(by=['margemGordon'], ascending=False, inplace=True)
 
     return gerarTable(tdiv.head(len(tdiv) // 1.5), 1000)
