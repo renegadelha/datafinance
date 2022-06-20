@@ -104,8 +104,61 @@ def calcularDividendos(dados):
     return df
 
 
+def getValue(ticket, dti, dtf, fun):
+    if (dtf == 0):
+        hist = yf.download(ticket, start=dti)
+    else:
+        hist = yf.download(ticket, start=dti, end=dtf)
+
+    if (len(hist) == 0):
+        return 0
+
+    if (fun == 'min'):
+        cotac = hist['Adj Close']
+        cotac = pd.DataFrame(cotac)
+        dataMenorCot = cotac[cotac['Adj Close'] == cotac['Adj Close'].min()].index[0].date().strftime("%Y-%m-%d")
+        return [hist['Adj Close'].min(), dataMenorCot]
+    elif (fun == 'max'):
+        return hist['Adj Close'].max()
+    elif (fun == 'last'):
+        lastPrice = hist['Adj Close'][-1]
+        if pd.isna(lastPrice):
+            lastPrice = hist['Adj Close'][-2]
+        return lastPrice
+
+
+def evolut(name):
+    name = name + '.SA'
+    cotPre = getValue(name, '2020-01-01', '2020-05-01', 'max')
+    if (cotPre == 0):
+        hist11 = yf.download(name)
+        if len(hist11) == 0:
+            return 0
+        else:
+            return (hist11.iloc[-1]['Adj Close'] - hist11.iloc[0]['Adj Close']) / hist11.iloc[0]['Adj Close'] * 100
+
+    saida = getValue(name, '2020-01-01', '2020-12-01', 'min')
+    cotFun = saida[0]
+    topoPos = getValue(name, saida[1], 0, 'max')
+    atual = getValue(name, '2020-05-01', 0, 'last')
+
+    recuperou = (atual / cotPre) * 100
+    encoraj = 1 - (((topoPos - cotFun) - (topoPos - atual)) / (topoPos - cotFun))
+    media = (recuperou + ((1 - encoraj) * 100)) / 2
+    # print(f"{atual} - {cotPre} - {cotFun} - {topoPos} - {saida[1]} - {recuperou} - {encoraj} - {media}")
+
+    return media
+
+
 def calcularMagicFormulaRene(dados):
+    empresas = dados.TICKER.values
+
+    for nome in empresas:
+        print(nome)
+        dados.loc[(dados.TICKER == nome), 'media'] = float("{0:.2f}".format(evolut(nome)))
+
     dados4 = dados.replace(np.nan, 0)
+    dados4.drop(dados4[dados4['media'] == 0].index, inplace=True)
 
     ranks = {}
     for name in dados4.TICKER:
@@ -114,20 +167,26 @@ def calcularMagicFormulaRene(dados):
     dados4 = dados4.sort_values(by=['ROE'], ascending=False)
     i = 1
     for name in dados4.TICKER:
-        i = i + 1
-        ranks[name] = ranks[name] + i
+        i = i * 1.25
+        ranks[name] = ranks[name] + int(i)
 
-    dados4 = dados4.sort_values(by=['MARGEM EBIT'], ascending=False)
-    i = 0
-    for name in dados4.TICKER:
-        i = i + 1
-        ranks[name] = ranks[name] + i
+    #    dados4 = dados4.sort_values(by=['ROIC'], ascending=False)
+    #    i = 0
+    #    for name in dados4.TICKER:
+    #        i = i + 1
+    #        ranks[name] = ranks[name] + int(1 / (0.1 + math.exp(-j+5)))
 
     dados4 = dados4.sort_values(by=['EV/EBIT'])
     i = 1
     for name in dados4.TICKER:
-        i = i + 1
-        ranks[name] = ranks[name] + i
+        i = i * 1.25
+        ranks[name] = ranks[name] + int(i)
+
+    dados4 = dados4.sort_values(by=['media'])
+    i = 1
+    for name in dados4.TICKER:
+        ranks[name] = ranks[name] + int(i)
+        i = i * 1.2
 
     final = pd.DataFrame.from_dict({'stock': ranks.keys(), 'pontos': ranks.values()})
     final = final.sort_values(by=['pontos'])
@@ -212,9 +271,10 @@ def modeloGraham(dados):
 def isOld(dados):
     acoesInclusas = []
 
-    for ticker in dados['TICKER']:
-        if len(yf.Ticker(ticker + '.sa').history()) > 0:
-            acoesInclusas.append(ticker)
+    for ticket in dados['TICKER']:
+        ret = yf.download(ticket + '.sa', start='2020-01-01', end='2020-01-30')
+        if (len(ret) > 0):
+            acoesInclusas.append(ticket)
 
     return dados[dados.TICKER.isin(acoesInclusas)]
 
@@ -235,9 +295,12 @@ def ticketsMaiorLiquidez(dados):
     return ticketsMaisLiquidos
 
 
+def teste():
+    return 2
+
 def lerCsv(path):
-    dados = pd.read_csv(path)
-    #, decimal=",", delimiter=";", thousands="."
+    dados = pd.read_csv(path, decimal=",", delimiter=";", thousands=".")
+    dados = dados.fillna(0)
 
     return dados
 
@@ -245,8 +308,8 @@ def lerCsv(path):
 def processarAnalise(dados, option):
 
     myStocks = True
-    print(option)
-    if option == 1:
+
+    if option ==1:
         empresasdiv = {'VBBR3': 1.3, 'BBSE3': 1.7, 'PSSA3': 1.3}
     elif option == 2:
         empresasdiv = {'VBBR3': 1.3, 'BBSE3': 1.7, 'PSSA3': 1.3, 'BRSR6': 0.7,
@@ -254,18 +317,21 @@ def processarAnalise(dados, option):
     elif option == 3:
         empresasdiv = {'VBBR3': 1.3, 'BBSE3': 1.7, 'PSSA3': 1.3, 'BRSR6': 0.7,
                        'BBAS3': 2.2, 'ITSA4': 0.6, 'EGIE3': 2.5, 'ENBR3': 1.3, 'ALUP11': 1.5}
-    elif option == 4:
-        empresasdiv = {'VBBR3': 1.3, 'BBSE3': 1.7, 'PSSA3': 1.3, 'BRSR6': 0.7,
-                       'BBAS3': 2.2, 'ITSA4': 0.6, 'EGIE3': 2.5, 'ENBR3': 1.3, 'ALUP11': 1.5,
-                       'TAEE11': 2.5,'VIVT3': 2.8, 'VALE3': 4}
     else:
         empresasdiv = {'VBBR3': 1.3, 'BBSE3': 1.7, 'PSSA3': 1.3}
 
     dados3 = dados[dados.TICKER.isin(list(empresasdiv.keys()))]
 
+    if not myStocks:
+        filtrados = ticketsMaiorLiquidez(dados3)
+        dados3 = dados3[dados.TICKER.isin(filtrados)]
+
+    if not myStocks:
+        dados3 = isOld(dados3)
+
     magdata = calcularMagicFormulaRene(dados3)
 
-#    divdata = calcularDividendos(dados3)
+    divdata = calcularDividendos(dados3)
 
     # grahamdata = modeloGraham(dados3)
 
@@ -276,21 +342,25 @@ def processarAnalise(dados, option):
         gordondata = modeloGordon(dados3)
 
     tmag = magdata
-    #tdiv = divdata
+    tdiv = divdata
     tgordon = gordondata
     # tgraham = grahamdata
 
-    #tdiv = tdiv.merge(tmag, how='left', on='stock')
-    #tdiv = tdiv.merge(grahamdata, how='left', on='stock')
+    tdiv = tdiv.merge(tmag, how='left', on='stock')
+    tdiv = tdiv.merge(tgordon, how='left', on='stock')
+    # tdiv = tdiv.merge(grahamdata, how='left', on='stock')
 
-    tmag = tmag.merge(tgordon, how='left', on='stock')
+    if not myStocks:
+        tdiv = tdiv.dropna()
+        tdiv = tdiv[tdiv['medianDIV'] < 15]
+        tdiv = tdiv[tdiv['volDIV'] < 1]
 
-    return tmag
 
+    return tdiv
 
 def distribuirAporte(tdiv, valoraporte):
 
     tdiv = computAporte(tdiv, 0, valoraporte, False)
-    tdiv.sort_values(by=['notaMedia'], ascending=False, inplace=True)
+    tdiv.sort_values(by=['notaMedia', 'medianDIV'], ascending=False, inplace=True)
 
     return tdiv

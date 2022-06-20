@@ -16,10 +16,8 @@ def gerarTable(tdiv, valor):
     return dadosTable
 
 
-def gerarTdiv(option):
-    data = analisador.lerCsv(path)
-
-    return analisador.processarAnalise(data, option)
+def gerarTdiv(option, csv):
+    return analisador.processarAnalise(csv, option)
 
 
 def viewTableAll(tdiv):
@@ -38,8 +36,9 @@ server = app.server #server heroku reconhecer a app
 
 actual_dir = pathlib.Path().absolute()
 
-path = f'{actual_dir}/data/statusinvest16062022.csv'
-tdiv = gerarTdiv(3)
+path = f'{actual_dir}/data/dados.csv'
+datacsv = analisador.lerCsv(path)
+tdiv = pd.DataFrame()
 padrao = pd.DataFrame()
 figura = gv.generateGraphMonth()
 
@@ -47,7 +46,9 @@ def serve_layout():
     global tdiv
     global padrao
     global figura
+    global datacsv
 
+    tdiv = gerarTdiv(3, datacsv)
     padrao = viewTableAll(tdiv)
     fig = px.line(figura)
 
@@ -57,7 +58,6 @@ def serve_layout():
     return html.Div(children=[
         html.Div([html.H1(children='DATA FINANCE')]
                  , className='banner'
-
                  )
         ,
 
@@ -68,19 +68,16 @@ def serve_layout():
                   html.Button(id='botaoInput', n_clicks=0, children='Atualizar')
                   ])
         ,
-
         html.Div(id='dataframe_output',
                  children=html.Div([
                                     dash_table.DataTable(
                                         id='table',
                                         data=padrao.to_dict('records'),
                                         columns=[{"name": i, "id": i} for i in padrao.columns],
-
                                     )
                                     ])
                  )
         ,
-
         html.Br(),
         html.Div([html.H3(children='Top {}'.format(len(tableTop)))]
                  , className='banner1'),
@@ -92,8 +89,8 @@ def serve_layout():
         html.Br(),
         html.Div([html.H3(children='Gráfico - Cotações nos últimos 30 dias')]
                  , className='banner1'),
+        html.Div(id='figuradiv', children=[dcc.Graph(figure=fig)]),
 
-        dcc.Graph(figure=fig),
         html.Div([html.H3(children='Admin')]
                  , className='banner1'),
         html.Div(['Senha:',
@@ -102,7 +99,7 @@ def serve_layout():
                   ,
                   html.Br(),
                   dcc.RadioItems(
-                      ['1', '2', '3'],
+                      ['1', '2', '3', '4'],
                       '1',
                       id='option_tdiv',
                       inline=True
@@ -119,7 +116,7 @@ def serve_layout():
 app.layout = serve_layout
 
 @app.callback(
-    Output('hiddendiv','children'),
+    Output('figuradiv','children'),
     Input('botaoSenha', 'n_clicks'),
     State('inputSenha', 'value'),
     State('option_tdiv', 'value'),
@@ -129,9 +126,12 @@ app.layout = serve_layout
 def update_tdiv_and_graph(n_clicks, value, radiovalue):
     global tdiv
     global figura
+    global datacsv
     if value == 'rnsg':
-        tdiv = gerarTdiv(int(radiovalue))
+        tdiv = gerarTdiv(int(radiovalue), datacsv)
         figura = gv.generateGraphMonth()
+
+        return html.Div([dcc.Graph(figure=px.line(figura))])
 
     elif len(value) == 0:
         raise exceptions.PreventUpdate
