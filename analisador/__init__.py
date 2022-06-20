@@ -3,6 +3,7 @@ import numpy as np
 import yfinance as yf
 import math
 from sklearn.linear_model import LinearRegression
+import time
 
 
 def computAporte(tdiv, priorizarTopo, valorAporte, rebuild):
@@ -107,9 +108,9 @@ def calcularDividendos(dados):
 def calcularMagicFormulaRene(dados):
     dados4 = dados.replace(np.nan, 0)
 
-    ranks = {}
-    for name in dados4.TICKER:
-        ranks[name] = 0
+    ranks = dict(zip(list(dados4.TICKER), [0] * len(dados4)))
+#    for name in dados4.TICKER:
+#        ranks[name] = 0
 
     dados4 = dados4.sort_values(by=['ROE'], ascending=False)
     i = 1
@@ -170,18 +171,17 @@ def modeloGordonMyStocks(dados):
 
         empresa = name + '.SA'
         comp = yf.Ticker(empresa)
-        hist2 = comp.history(period="1y")
+        hist2 = comp.history()
 
-        if (len(hist2) != 0):
-            gordonPrice = dados.get(name) / 0.06
-            lastPrice = hist2['Close'][-1]
+        gordonPrice = dados.get(name) / 0.06
+        lastPrice = hist2['Close'][-1]
 
-            if pd.isna(lastPrice):
-                lastPrice = hist2['Close'][-2]
+        if pd.isna(lastPrice):
+            lastPrice = hist2['Close'][-2]
 
-            difGordon = (gordonPrice - lastPrice) / lastPrice * 100
+        difGordon = (gordonPrice - lastPrice) / lastPrice * 100
 
-            gordon.append([name, float("{0:.2f}".format(difGordon))])
+        gordon.append([name, float("{0:.2f}".format(difGordon))])
 
     dadoGordon = pd.DataFrame(gordon, columns=['stock', 'margemGordon'])
     return dadoGordon
@@ -245,7 +245,7 @@ def lerCsv(path):
 def processarAnalise(dados, option):
 
     myStocks = True
-    print(option)
+
     if option == 1:
         empresasdiv = {'VBBR3': 1.3, 'BBSE3': 1.7, 'PSSA3': 1.3}
     elif option == 2:

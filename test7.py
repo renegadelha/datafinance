@@ -24,10 +24,10 @@ def viewTableAll(tdiv):
     return gerarTable(tdiv, 1000)
 
 
-def viewTableTop(tdiv):
-    tdiv2 = tdiv.head(len(tdiv) // 2)
+def viewTableTop(tdiv: pandas.core.frame.DataFrame):
+    tdiv.sort_values(by=['margemGordon'], ascending=False, inplace=True)
 
-    return gerarTable(tdiv2, 1000)
+    return gerarTable(tdiv.head(len(tdiv) // 1.5), 1000)
 
 
 app = Dash(__name__)
@@ -39,17 +39,14 @@ actual_dir = pathlib.Path().absolute()
 path = f'{actual_dir}/data/dados.csv'
 datacsv = analisador.lerCsv(path)
 tdiv = pd.DataFrame()
-padrao = pd.DataFrame()
 figura = gv.generateGraphMonth()
 
 def serve_layout():
     global tdiv
-    global padrao
     global figura
     global datacsv
 
     tdiv = gerarTdiv(3, datacsv)
-    padrao = viewTableAll(tdiv)
     fig = px.line(figura)
 
     tableAll = viewTableAll(tdiv)
@@ -60,8 +57,7 @@ def serve_layout():
                  , className='banner'
                  )
         ,
-
-        html.Div([html.H3(children='Top {}'.format(len(tableAll)))]
+        html.Div([html.H3(children='Top')]
                  , className='banner1'),
         html.Div(['valor do Aporte:',
                   dcc.Input(id='botaoValor', value='1000', type='text'),
@@ -72,14 +68,14 @@ def serve_layout():
                  children=html.Div([
                                     dash_table.DataTable(
                                         id='table',
-                                        data=padrao.to_dict('records'),
-                                        columns=[{"name": i, "id": i} for i in padrao.columns],
+                                        data=tableAll.to_dict('records'),
+                                        columns=[{"name": i, "id": i} for i in tableAll.columns],
                                     )
                                     ])
                  )
         ,
         html.Br(),
-        html.Div([html.H3(children='Top {}'.format(len(tableTop)))]
+        html.Div([html.H3(children='Top+')]
                  , className='banner1'),
         dash_table.DataTable(id='table2',
                              data=tableTop.to_dict('records'),
