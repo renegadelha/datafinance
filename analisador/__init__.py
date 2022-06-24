@@ -261,7 +261,8 @@ def processarAnalise(dados, option):
     else:
         empresasdiv = {'VBBR3': 1.3, 'BBSE3': 1.7, 'PSSA3': 1.3}
 
-    dados3 = dados[dados.TICKER.isin(list(empresasdiv.keys()))]
+    dados3 = dados[dados.TICKER.isin(list(empresasdiv.keys()))].copy()
+    dados3.loc[dados3['MARGEM EBIT'] == 0, 'MARGEM EBIT'] = dados3['MARGEM EBIT'].median()
 
     magdata = calcularMagicFormulaRene(dados3)
 

@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="41dfb446-12c4-4564-b7e5-e7a0a7c72a90" name="Default Changelist" comment="adicionei duas novas pages">
-      <change beforePath="$PROJECT_DIR$/test7.py" beforeDir="false" afterPath="$PROJECT_DIR$/test7.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analisador/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/analisador/__init__.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,7 +101,7 @@
       <recent name="D:\pythonProjects\datafinancerene\data" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.test7">
+  <component name="RunManager" selected="Python.test">
     <configuration name="manipulatecsv" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="datafinancerene" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -122,7 +123,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="test6" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="datafinancerene" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -134,7 +135,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test6.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -202,11 +203,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.test" />
         <item itemvalue="Python.test7" />
         <item itemvalue="Python.testar" />
         <item itemvalue="Python.manipulatecsv" />
         <item itemvalue="Python tests.manipulatecsv.py" />
-        <item itemvalue="Python.test6" />
       </list>
     </recent_temporary>
   </component>
