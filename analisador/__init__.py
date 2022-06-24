@@ -156,7 +156,7 @@ def modeloGordon(dados):
             if pd.isna(lastPrice):
                 lastPrice = hist['Close'][-2]
 
-            difGordon = (gordonPrice - lastPrice) / lastPrice * 100
+            difGordon = (gordonPrice - lastPrice) / gordonPrice * 100
 
             gordon.append([name, float("{0:.2f}".format(difGordon))])
 
@@ -179,7 +179,7 @@ def modeloGordonMyStocks(dados):
         if pd.isna(lastPrice):
             lastPrice = hist2['Close'][-2]
 
-        difGordon = (gordonPrice - lastPrice) / lastPrice * 100
+        difGordon = (gordonPrice - lastPrice) / gordonPrice * 100
 
         gordon.append([name, float("{0:.2f}".format(difGordon))])
 

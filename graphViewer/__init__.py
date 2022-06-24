@@ -6,7 +6,7 @@ import numpy as np
 def generateGraphMonth():
 
     stocks = ['brsr6.sa', 'bbas3.sa', 'VBBR3.sa', 'bbse3.sa', 'pssa3.sa', 'itsa4.sa', 'egie3.sa', 'enbr3.sa', 'alup11.sa' ]
-    data = yf.download(stocks, period='1mo')
+    data = yf.download(stocks, start='2022-01-01')
 
     data = (data['Adj Close']/data['Adj Close'].shift() * 100 - 100).dropna()
 

@@ -27,7 +27,8 @@ def viewTableAll(tdiv):
 def viewTableTop(tdiv):
     tdiv.sort_values(by=['margemGordon'], ascending=False, inplace=True)
 
-    return gerarTable(tdiv.head(int(len(tdiv) // 1.5)), 1000)
+    return gerarTable(tdiv[tdiv['margemGordon'] > 0], 1000)
+    #return gerarTable(tdiv.head(int(len(tdiv) // 1.5)), 1000)
 
 
 app = Dash(__name__)
@@ -83,7 +84,7 @@ def serve_layout():
                              ),
 
         html.Br(),
-        html.Div([html.H3(children='Gráfico - Cotações nos últimos 30 dias')]
+        html.Div([html.H3(children='Gráfico - Variação das Cotações no ano')]
                  , className='banner1'),
         html.Div(id='figuradiv', children=[dcc.Graph(figure=fig)]),
 
