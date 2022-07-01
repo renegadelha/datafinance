@@ -27,7 +27,7 @@ def viewTableAll(tdiv):
 def viewTableTop(tdiv):
     tdiv.sort_values(by=['margemGordon'], ascending=False, inplace=True)
 
-    return gerarTable(tdiv[tdiv['margemGordon'] > 0], 1000)
+    return gerarTable(tdiv.head(len(tdiv)//2), 1000)
     #return gerarTable(tdiv.head(int(len(tdiv) // 1.5)), 1000)
 
 
@@ -37,7 +37,7 @@ server = app.server #server heroku reconhecer a app
 
 actual_dir = pathlib.Path().absolute()
 
-path = f'{actual_dir}/data/dados.csv'
+path = f'{actual_dir}/data/statusinvest-busca-avancada.csv'
 datacsv = analisador.lerCsv(path)
 tdiv = pd.DataFrame()
 figura = gv.generateGraphMonth()

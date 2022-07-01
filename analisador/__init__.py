@@ -236,8 +236,8 @@ def ticketsMaiorLiquidez(dados):
 
 
 def lerCsv(path):
-    dados = pd.read_csv(path)
-    #, decimal=",", delimiter=";", thousands="."
+    dados = pd.read_csv(path, decimal=",", delimiter=";", thousands=".")
+    #
 
     return dados
 
@@ -247,16 +247,16 @@ def processarAnalise(dados, option):
     myStocks = True
 
     if option == 1:
-        empresasdiv = {'VBBR3': 1.3, 'BBSE3': 1.7, 'PSSA3': 1.3}
+        empresasdiv = {'VBBR3': 1.3, 'BBSE3': 1.7, 'PSSA3': 1.1}
     elif option == 2:
-        empresasdiv = {'VBBR3': 1.3, 'BBSE3': 1.7, 'PSSA3': 1.3, 'BRSR6': 0.7,
+        empresasdiv = {'VBBR3': 1.3, 'BBSE3': 1.7, 'PSSA3': 1.1, 'BRSR6': 0.7,
                        'BBAS3': 2.2, 'ITSA4': 0.6}
     elif option == 3:
-        empresasdiv = {'VBBR3': 1.3, 'BBSE3': 1.7, 'PSSA3': 1.3, 'BRSR6': 0.7,
-                       'BBAS3': 2.2, 'ITSA4': 0.6, 'EGIE3': 2.5, 'ENBR3': 1.3, 'ALUP11': 1.5}
+        empresasdiv = {'VBBR3': 1.3, 'BBSE3': 1.7, 'PSSA3': 1.1, 'BRSR6': 0.7,
+                       'BBAS3': 2.2, 'ITSA4': 0.6, 'EGIE3': 2.5, 'ENBR3': 1.3, 'ALUP11': 1.6}
     elif option == 4:
-        empresasdiv = {'VBBR3': 1.3, 'BBSE3': 1.7, 'PSSA3': 1.3, 'BRSR6': 0.7,
-                       'BBAS3': 2.2, 'ITSA4': 0.6, 'EGIE3': 2.5, 'ENBR3': 1.3, 'ALUP11': 1.5,
+        empresasdiv = {'VBBR3': 1.3, 'BBSE3': 1.7, 'PSSA3': 1.1, 'BRSR6': 0.7,
+                       'BBAS3': 2.2, 'ITSA4': 0.6, 'EGIE3': 2.5, 'ENBR3': 1.3, 'ALUP11': 1.6,
                        'TAEE11': 2.5,'VIVT3': 2.8, 'VALE3': 4}
     else:
         empresasdiv = {'VBBR3': 1.3, 'BBSE3': 1.7, 'PSSA3': 1.3}
