@@ -37,18 +37,18 @@ server = app.server #server heroku reconhecer a app
 
 actual_dir = pathlib.Path().absolute()
 
-path = f'{actual_dir}/data/statusinvest-busca-avancada.csv'
-datacsv = analisador.lerCsv(path)
+path = f'{actual_dir}/data/dados.pkl'
+data_cias = analisador.lerpickel(path)
 tdiv = pd.DataFrame()
-figura = gv.generateGraphMonth()
+figura = None
 
 def serve_layout():
     global tdiv
     global figura
-    global datacsv
+    global data_cias
 
-    tdiv = gerarTdiv(3, datacsv)
-    fig = px.line(figura)
+    tdiv = gerarTdiv(3, data_cias)
+#    fig = px.line(figura)
 
     tableAll = viewTableAll(tdiv)
     tableTop = viewTableTop(tdiv)
@@ -84,10 +84,17 @@ def serve_layout():
                              ),
 
         html.Br(),
-        html.Div([html.H3(children='Gráfico - Variação das Cotações no ano')]
+        html.Div([html.H3(children='Gráfico - Retorno % no período')]
                  , className='banner1'),
-        html.Div(id='figuradiv', children=[dcc.Graph(figure=fig)]),
-
+        dcc.RadioItems(
+            ['diário', '30 dias', '180 dias', 'no Ano'],
+            'diário',
+            id='option_graph',
+            inline=True
+        ),
+        html.Button(id='botaoGraph', n_clicks=0, children='Gerar Gráfico'),
+        html.Div(id='figuradiv', children=[]),
+        #html.Div(id='figuradiv', children=[dcc.Graph(figure=fig)]),
         html.Div([html.H3(children='Admin')]
                  , className='banner1'),
         html.Div(['Senha:',
@@ -105,7 +112,7 @@ def serve_layout():
 
         ,
 
-        html.Div(id='hiddendiv', style={'display': 'none'})
+        html.Div(id='hiddendiv', children=[], style={'display': 'none'})
 
     ])
 
@@ -114,6 +121,22 @@ app.layout = serve_layout
 
 @app.callback(
     Output('figuradiv','children'),
+    Input('botaoGraph', 'n_clicks'),
+    State('option_graph', 'value'),
+    prevent_initial_call=True
+
+)
+def update_graph(n_clicks, valor):
+    global tdiv
+    global figura
+    global data_cias
+    figura = gv.generateGraphMonth(valor)
+
+    return html.Div([dcc.Graph(figure=px.line(figura))])
+
+
+@app.callback(
+    Output('hiddendiv','children'),
     Input('botaoSenha', 'n_clicks'),
     State('inputSenha', 'value'),
     State('option_tdiv', 'value'),
@@ -123,12 +146,11 @@ app.layout = serve_layout
 def update_tdiv_and_graph(n_clicks, value, radiovalue):
     global tdiv
     global figura
-    global datacsv
+    global data_cias
     if value == 'rnsg':
-        tdiv = gerarTdiv(int(radiovalue), datacsv)
-        figura = gv.generateGraphMonth()
+        tdiv = gerarTdiv(int(radiovalue), data_cias)
 
-        return html.Div([dcc.Graph(figure=px.line(figura))])
+        return html.Div(['Done!'])
 
     elif len(value) == 0:
         raise exceptions.PreventUpdate

@@ -1,3 +1,5 @@
+import time
+
 import pandas as pd
 import yfinance as yf
 import pathlib
@@ -36,5 +38,23 @@ def criarcsv():
     print("terminei")
 
 
+def gerarPickel():
+    actual_dir = pathlib.Path().absolute()
+
+    path = f'{actual_dir}/data/statusinvest-busca-avancada.csv'
+    dados = pd.read_csv(path, decimal=",", delimiter=";", thousands=".")
+    dados = dados.fillna(0)
+    dados.drop(dados[dados[' LIQUIDEZ MEDIA DIARIA'] < 500000].index, inplace=True)
+    dados.drop(dados[dados['PRECO'] <= 0].index, inplace=True)
+    dados = isOld(dados)
+
+    dados.to_pickle(f'{actual_dir}/data/dados.pkl')
+    print("terminei pkl")
+
 if __name__ == '__main__':
-    criarcsv()
+    init = time.time()
+    actual_dir = pathlib.Path().absolute()
+    path = f'{actual_dir}/data/dados.pkl'
+    data = analisador.lerpickel(path)
+    gastou = time.time() - init
+    print(gastou)

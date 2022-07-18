@@ -3,18 +3,23 @@ import yfinance as yf
 import numpy as np
 
 
-def generateGraphMonth():
+def generateGraphMonth(tempo):
+    '30 dias', '180 dias', 'no Ano'
+    stocks = ['brsr6.sa', 'bbas3.sa', 'VBBR3.sa', 'bbse3.sa', 'pssa3.sa', 'itsa4.sa','taee11.sa', 'egie3.sa', 'enbr3.sa', 'alup11.sa' ]
+    if tempo == 'diário':
+        data = yf.download(stocks, period='2d')
+    elif tempo == '30 dias':
+        data = yf.download(stocks, period='30d')
+    elif tempo == '180 dias':
+        data = yf.download(stocks, period='180d')
+    else:
+        data = yf.download(stocks, start='2022-01-01')
 
-    stocks = ['brsr6.sa', 'bbas3.sa', 'VBBR3.sa', 'bbse3.sa', 'pssa3.sa', 'itsa4.sa', 'egie3.sa', 'enbr3.sa', 'alup11.sa' ]
-    data = yf.download(stocks, start='2022-01-01')
-
-    data = (data['Adj Close']/data['Adj Close'].shift() * 100 - 100).dropna()
+    data = (data['Adj Close']/data['Adj Close'].shift() * 100 - 100).fillna(0)
 
     data = data.cumsum()
 
-    line0 = pd.DataFrame(np.zeros((1, len(stocks))), columns=data.columns)
+    return data
 
-    data2 = pd.concat([line0, data], ignore_index=True, axis=0).dropna()
 
-    return data2
 

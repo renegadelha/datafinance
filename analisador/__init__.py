@@ -238,8 +238,10 @@ def ticketsMaiorLiquidez(dados):
 def lerCsv(path):
     dados = pd.read_csv(path, decimal=",", delimiter=";", thousands=".")
     #
-
     return dados
+
+def lerpickel(path):
+    return pd.read_pickle(path)
 
 
 def processarAnalise(dados, option):
