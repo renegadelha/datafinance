@@ -25,9 +25,10 @@ def viewTableAll(tdiv):
 
 
 def viewTableTop(tdiv):
+    tdiv = tdiv[tdiv['margemGordon'] > 0]
     tdiv.sort_values(by=['margemGordon'], ascending=False, inplace=True)
 
-    return gerarTable(tdiv.head(len(tdiv)//2), 1000)
+    return gerarTable(tdiv.head(3), 1000)
     #return gerarTable(tdiv.head(int(len(tdiv) // 1.5)), 1000)
 
 
@@ -76,7 +77,7 @@ def serve_layout():
                  )
         ,
         html.Br(),
-        html.Div([html.H3(children='Top+')]
+        html.Div([html.H3(children='Top 3')]
                  , className='banner1'),
         dash_table.DataTable(id='table2',
                              data=tableTop.to_dict('records'),

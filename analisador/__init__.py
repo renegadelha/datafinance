@@ -252,14 +252,14 @@ def processarAnalise(dados, option):
         empresasdiv = {'VBBR3': 1.3, 'BBSE3': 1.7, 'PSSA3': 1.1}
     elif option == 2:
         empresasdiv = {'VBBR3': 1.3, 'BBSE3': 1.7, 'PSSA3': 1.1, 'BRSR6': 0.7,
-                       'BBAS3': 2.2, 'ITSA4': 0.6}
+                       'BBAS3': 2.2, 'ITSA4': 0.55}
     elif option == 3:
         empresasdiv = {'VBBR3': 1.3, 'BBSE3': 1.7, 'PSSA3': 1.1, 'BRSR6': 0.7,
-                       'BBAS3': 2.2, 'ITSA4': 0.6, 'EGIE3': 2.5, 'ENBR3': 1.3, 'ALUP11': 1.6}
+                       'BBAS3': 2.2, 'ITSA4': 0.55, 'EGIE3': 2.5, 'ENBR3': 1.3, 'ALUP11': 1.6, 'TAEE11': 2.3}
     elif option == 4:
         empresasdiv = {'VBBR3': 1.3, 'BBSE3': 1.7, 'PSSA3': 1.1, 'BRSR6': 0.7,
-                       'BBAS3': 2.2, 'ITSA4': 0.6, 'EGIE3': 2.5, 'ENBR3': 1.3, 'ALUP11': 1.6,
-                       'TAEE11': 2.5,'VIVT3': 2.8, 'VALE3': 4}
+                       'BBAS3': 2.2, 'ITSA4': 0.55, 'EGIE3': 2.5, 'ENBR3': 1.3, 'ALUP11': 1.6,'TAEE11': 2.3,
+                       'VIVT3': 2.8, 'VALE3': 4}
     else:
         empresasdiv = {'VBBR3': 1.3, 'BBSE3': 1.7, 'PSSA3': 1.3}
 
