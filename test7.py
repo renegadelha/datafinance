@@ -21,6 +21,7 @@ def gerarTdiv(option, csv):
 
 
 def viewTableAll(tdiv):
+    tdiv = tdiv[tdiv['margemGordon'] > -10]
     return gerarTable(tdiv, 1000)
 
 
@@ -108,7 +109,7 @@ def serve_layout():
                       '1',
                       id='option_tdiv',
                       inline=True
-                  )
+                  ),
                   ])
 
         ,
@@ -149,6 +150,7 @@ def update_tdiv_and_graph(n_clicks, value, radiovalue):
     global figura
     global data_cias
     if value == 'rnsg':
+        tdiv = tdiv[tdiv['margemGordon'] > -10]
         tdiv = gerarTdiv(int(radiovalue), data_cias)
 
         return html.Div(['Done!'])
@@ -168,6 +170,8 @@ def update_table(n_clicks, value):
     global tdiv
 
     if len(value) > 0:
+
+        tdiv = tdiv[tdiv['margemGordon'] > -10]
         newtable = gerarTable(tdiv, float(value))
         child = html.Div([
             dash_table.DataTable(
