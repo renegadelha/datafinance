@@ -77,7 +77,7 @@ def serve_layout():
                  )
         ,
         html.Br(),
-        html.Div([html.H3(children='Top 3')]
+        html.Div([html.H3(children='Top +')]
                  , className='banner1'),
         dash_table.DataTable(id='table2',
                              data=tableTop.to_dict('records'),
