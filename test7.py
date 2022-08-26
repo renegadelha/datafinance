@@ -29,7 +29,7 @@ def viewTableTop(tdiv):
     tdiv = tdiv[tdiv['margemGordon'] > 0]
     tdiv.sort_values(by=['margemGordon'], ascending=False, inplace=True)
 
-    return gerarTable(tdiv.head(3), 1000)
+    return gerarTable(tdiv, 1000)
     #return gerarTable(tdiv.head(int(len(tdiv) // 1.5)), 1000)
 
 
