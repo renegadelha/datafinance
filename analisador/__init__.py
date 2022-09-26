@@ -3,6 +3,7 @@ import numpy as np
 import yfinance as yf
 import math
 from sklearn.linear_model import LinearRegression
+import tweepy as tw
 import time
 
 
@@ -297,3 +298,18 @@ def distribuirAporte(tdiv, valoraporte):
     tdiv.sort_values(by=['notaMedia'], ascending=False, inplace=True)
 
     return tdiv
+
+def capturarTweets(stocks):
+    auth = tw.OAuthHandler('jXPLVPJ66fGJizGijEfnEg', 'gynr3QHMVoQLuvc5zX2nZzmIPRg97qJkSUlYhmxQOE')
+    auth.set_access_token('206698741-uA2PhwtLD1RT3aa9iXjZlxxjKMmg3HbgFYAQleTl',
+                          'PCkJYQmL2YlN8CK449zIevBb56Oiu17TAhycqXaLwhtw8')
+
+    api = tw.API(auth, wait_on_rate_limit=True)
+
+    busca = str(stocks[0])
+    for n in range(1, len(stocks)):
+        busca = busca + ' OR ' + str(stocks[n])
+
+    tweets = tw.Cursor(api.search_tweets, q=busca, lang="pt").items(50)
+
+    return tweets

@@ -49,7 +49,7 @@ def serve_layout():
     global figura
     global data_cias
 
-    tdiv = gerarTdiv(4, data_cias)
+    tdiv = gerarTdiv(3, data_cias)
 #    fig = px.line(figura)
 
     tableAll = viewTableAll(tdiv)
@@ -97,6 +97,17 @@ def serve_layout():
         html.Button(id='botaoGraph', n_clicks=0, children='Gerar Gráfico'),
         html.Div(id='figuradiv', children=[]),
         #html.Div(id='figuradiv', children=[dcc.Graph(figure=fig)]),
+
+        html.Br(),
+        html.Div([html.H3(children='Tweets')]
+                 , className='banner1'),
+
+        html.Div([
+            dcc.Dropdown(id='tweetDropdown', options=['SIMH3','EGIE3','ALUP11','TAEE11','ENBR3','BBSE3','PSSA3','VBBR3','ITSA4','BBAS3','BRSR6','JBSS3','VIVT3','JHSF3'], multi=True)
+        ]),
+        html.Button(id='botaoTweets', n_clicks=0, children='Exibir Tweets'),
+        html.Div(id='tweetsdiv', children=[]),
+
         html.Div([html.H3(children='Admin')]
                  , className='banner1'),
         html.Div(['Senha:',
@@ -111,7 +122,6 @@ def serve_layout():
                       inline=True
                   ),
                   ])
-
         ,
 
         html.Div(id='hiddendiv', children=[], style={'display': 'none'})
@@ -185,7 +195,33 @@ def update_table(n_clicks, value):
     elif len(value) == 0:
         raise exceptions.PreventUpdate
 
+@app.callback(
+    Output('tweetsdiv', 'children'),
+    Input('botaoTweets', 'n_clicks'),
+    State('tweetDropdown', 'value'),
+    prevent_initial_call=True
+)
+def update_output2(n_clicks, value):
 
+    tweets = analisador.capturarTweets(value)
+    lista = list()
+    for status in tweets:
+        t = status.created_at
+        saida = str(t.day) + "/" + str(t.day) + ' - ' + str(t.hour) + ':' + str(t.minute)
+        lista.append([saida, str(status.text)])
+
+    dataTw = pd.DataFrame(lista)
+    dataTw.columns = ['Criado em', 'Tweet']
+
+    child = html.Div([
+
+        dash_table.DataTable(
+                id='table',
+                data=dataTw.to_dict('records'),
+                columns=[{"name": i, "id": i} for i in dataTw.columns],
+            )
+    ])
+    return child
 
 if __name__ == '__main__':
     app.run_server(debug=True, port=8054)
