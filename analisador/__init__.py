@@ -4,7 +4,7 @@ import yfinance as yf
 import math
 from sklearn.linear_model import LinearRegression
 import tweepy as tw
-import time
+
 
 
 def computAporte(tdiv, priorizarTopo, valorAporte, rebuild):
