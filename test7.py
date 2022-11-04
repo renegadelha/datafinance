@@ -39,8 +39,8 @@ server = app.server #server heroku reconhecer a app
 
 actual_dir = pathlib.Path().absolute()
 
-path = f'{actual_dir}/data/dados.pkl'
-data_cias = analisador.lerpickel(path)
+path = f'{actual_dir}/data/statusinvest-busca-avancada.csv'
+data_cias = analisador.lerCsv(path)
 tdiv = pd.DataFrame()
 figura = None
 
