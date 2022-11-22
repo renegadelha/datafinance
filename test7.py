@@ -49,7 +49,7 @@ def serve_layout():
     global figura
     global data_cias
 
-    tdiv = gerarTdiv(4, data_cias)
+    tdiv = gerarTdiv(3, data_cias)
 #    fig = px.line(figura)
 
     tableAll = viewTableAll(tdiv)
