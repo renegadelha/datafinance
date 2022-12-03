@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="41dfb446-12c4-4564-b7e5-e7a0a7c72a90" name="Default Changelist" comment="adicionei duas novas pages">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analisador/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/analisador/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/statusinvest-busca-avancada.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test7.py" beforeDir="false" afterPath="$PROJECT_DIR$/test7.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
