@@ -9,11 +9,11 @@ app = Dash(__name__)
 
 actual_dir = pathlib.Path().absolute()
 
-path = f'{actual_dir}/data/statusinvest02062022.csv'
+path = f'{actual_dir}/data/statusinvest-busca-avancada.csv'
 
 data = analisador.lerCsv(path)
 
-tdiv = analisador.processarAnalise(data)
+tdiv = analisador.processarAnalise(data, 3)
 
 dadosTable = analisador.distribuirAporte(tdiv.copy(), 1000)
 dadosTable.reset_index(inplace=True)

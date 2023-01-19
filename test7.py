@@ -8,11 +8,12 @@ import plotly.express as px
 import graphViewer as gv
 import plotly.graph_objs as go
 
+#teste
 
 def gerarTable(tdiv, valor):
     dadosTable = analisador.distribuirAporte(tdiv.copy(), valor)
     dadosTable.reset_index(inplace=True)
-
+    print('ok')
     return dadosTable
 
 
@@ -50,10 +51,11 @@ def serve_layout():
     global data_cias
 
     tdiv = gerarTdiv(3, data_cias)
-#    fig = px.line(figura)
+#   fig = px.line(figura)
 
     tableAll = viewTableAll(tdiv)
     tableTop = viewTableTop(tdiv)
+
 
     return html.Div(children=[
         html.Div([html.H1(children='DATA FINANCE')]
