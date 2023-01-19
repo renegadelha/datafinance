@@ -58,7 +58,7 @@ def serve_layout():
 
 
     return html.Div(children=[
-        html.Div([html.H1(children='DATA FINANCE')]
+        html.Div([html.H1(children='DATA FINANCE v3')]
                  , className='banner'
                  )
         ,
