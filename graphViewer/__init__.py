@@ -13,7 +13,7 @@ def generateGraphMonth(tempo):
     elif tempo == '180 dias':
         data = yf.download(stocks, period='180d')
     else:
-        data = yf.download(stocks, start='2022-01-01')
+        data = yf.download(stocks, start='2023-01-01')
 
     data = (data['Adj Close']/data['Adj Close'].shift() * 100 - 100).fillna(0)
 

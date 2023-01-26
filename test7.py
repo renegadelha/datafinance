@@ -13,7 +13,6 @@ import plotly.graph_objs as go
 def gerarTable(tdiv, valor):
     dadosTable = analisador.distribuirAporte(tdiv.copy(), valor)
     dadosTable.reset_index(inplace=True)
-    print('ok')
     return dadosTable
 
 
@@ -22,7 +21,7 @@ def gerarTdiv(option, csv):
 
 
 def viewTableAll(tdiv):
-    tdiv = tdiv[tdiv['margemGordon'] > -10]
+    tdiv = tdiv[tdiv['margemGordon'] > -5]
     return gerarTable(tdiv, 1000)
 
 
@@ -58,7 +57,7 @@ def serve_layout():
 
 
     return html.Div(children=[
-        html.Div([html.H1(children='DATA FINANCE v3')]
+        html.Div([html.H1(children='DATA FINANCE')]
                  , className='banner'
                  )
         ,
@@ -162,7 +161,7 @@ def update_tdiv_and_graph(n_clicks, value, radiovalue):
     global figura
     global data_cias
     if value == 'rnsg':
-        tdiv = tdiv[tdiv['margemGordon'] > -10]
+        tdiv = tdiv[tdiv['margemGordon'] > -5]
         tdiv = gerarTdiv(int(radiovalue), data_cias)
 
         return html.Div(['Done!'])
@@ -183,7 +182,7 @@ def update_table(n_clicks, value):
 
     if len(value) > 0:
 
-        tdiv = tdiv[tdiv['margemGordon'] > -10]
+        tdiv = tdiv[tdiv['margemGordon'] > -5]
         newtable = gerarTable(tdiv, float(value))
         child = html.Div([
             dash_table.DataTable(
@@ -209,7 +208,7 @@ def update_output2(n_clicks, value):
     lista = list()
     for status in tweets:
         t = status.created_at
-        saida = str(t.day) + "/" + str(t.day) + ' - ' + str(t.hour) + ':' + str(t.minute)
+        saida = "dia " + str(t.day) + ' - ' + str(t.hour) + ':' + str(t.minute)
         lista.append([saida, str(status.text)])
 
     dataTw = pd.DataFrame(lista)
@@ -226,7 +225,7 @@ def update_output2(n_clicks, value):
     return child
 
 if __name__ == '__main__':
-    app.run_server(debug=True, port=8054)
+    app.run_server(debug=True, port=8050)
 
 '''
 
