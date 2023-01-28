@@ -306,6 +306,9 @@ def capturarTweets(stocks):
 
     api = tw.API(auth, wait_on_rate_limit=True)
 
+    if str(stocks[0]) == 'Todos':
+        stocks = ['SIMH3', 'EGIE3', 'ALUP11', 'TAEE11', 'ENBR3', 'BBSE3', 'PSSA3', 'VBBR3', 'ITSA4', 'BBAS3', 'BRSR6', 'JBSS3', 'VIVT3', 'JHSF3']
+
     busca = str(stocks[0])
     for n in range(1, len(stocks)):
         busca = busca + ' OR ' + str(stocks[n])
