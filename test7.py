@@ -8,7 +8,8 @@ import plotly.express as px
 import graphViewer as gv
 import plotly.graph_objs as go
 
-#teste
+import manipulatecsv
+
 
 def gerarTable(tdiv, valor):
     dadosTable = analisador.distribuirAporte(tdiv.copy(), valor)
@@ -163,6 +164,8 @@ def update_tdiv_and_graph(n_clicks, value, radiovalue):
     if value == 'rnsg':
         tdiv = tdiv[tdiv['margemGordon'] > -5]
         tdiv = gerarTdiv(int(radiovalue), data_cias)
+
+        manipulatecsv.testarArquivo(f'{actual_dir}/data/teste.txt')
 
         return html.Div(['Done!'])
 

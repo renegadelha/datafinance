@@ -1,5 +1,4 @@
-import time
-
+from datetime import datetime as dt
 import pandas as pd
 import yfinance as yf
 import pathlib
@@ -50,6 +49,12 @@ def gerarPickel():
 
     dados.to_pickle(f'{actual_dir}/data/dados.pkl')
     print("terminei pkl")
+
+def testarArquivo(path):
+    f = open(path, "a+")
+    current_time = dt.now().strftime("%H:%M:%S")
+    f.write(str(current_time))
+    f.close()
 
 if __name__ == '__main__':
     gerarPickel()
