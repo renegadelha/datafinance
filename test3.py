@@ -30,7 +30,7 @@ padrao = gerarTable(tdiv, 1000)
 
 
 app.layout = html.Div(children=[
-    html.H1(children='DATA FINANCE RENE'),
+    html.H1(children='DATA FINANCE RENE2'),
     html.Br(),
     html.Div(['valor :',
             dcc.Input(id='botaoValor', value='1234', type='text')
