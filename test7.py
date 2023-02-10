@@ -165,7 +165,7 @@ def update_tdiv_and_graph(n_clicks, value, radiovalue):
         tdiv = tdiv[tdiv['margemGordon'] > -5]
         tdiv = gerarTdiv(int(radiovalue), data_cias)
 
-        manipulatecsv.testarArquivo(f'{actual_dir}/data/teste.txt')
+        #manipulatecsv.testarArquivo(f'{actual_dir}/data/teste.txt')
 
         return html.Div(['Done!'])
 
