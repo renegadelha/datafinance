@@ -250,16 +250,16 @@ def processarAnalise(dados, option):
     myStocks = True
 
     if option == 1:
-        empresasdiv = {'VBBR3': 1, 'EGIE3': 2.3, 'ENBR3': 1.2, 'ALUP11': 1.6, 'TAEE11': 2.1}
+        empresasdiv = {'VBBR3': 1, 'EGIE3': 2.3, 'ENBR3': 1.15, 'ALUP11': 1.6, 'TAEE11': 2.1}
     elif option == 2:
         empresasdiv = {'VBBR3': 1, 'BBSE3': 1.7, 'BRSR6': 0.6,
                        'BBAS3': 2.2, 'ITSA4': 0.5}
     elif option == 3:
-        empresasdiv = {'VBBR3': 1, 'BBSE3': 1.7, 'PSSA3': 1.2, 'BRSR6': 0.6,
-                       'BBAS3': 2.2, 'ITSA4': 0.5, 'EGIE3': 2.3, 'ENBR3': 1.2, 'ALUP11': 1.6, 'TAEE11': 2.1}
+        empresasdiv = {'VBBR3': 1, 'BBSE3': 1.7, 'PSSA3': 1.3, 'BRSR6': 0.6,
+                       'BBAS3': 2.2, 'ITSA4': 0.5, 'EGIE3': 2.3, 'ENBR3': 1.15, 'ALUP11': 1.6, 'TAEE11': 2.1}
     elif option == 4:
-        empresasdiv = {'VBBR3': 1, 'BBSE3': 1.7, 'PSSA3': 1.2, 'BRSR6': 0.6,
-                       'BBAS3': 2.2, 'ITSA4': 0.5, 'EGIE3': 2.3, 'ENBR3': 1.2, 'ALUP11': 1.6, 'TAEE11': 2.1,
+        empresasdiv = {'VBBR3': 1, 'BBSE3': 1.7, 'PSSA3': 1.3, 'BRSR6': 0.6,
+                       'BBAS3': 2.2, 'ITSA4': 0.5, 'EGIE3': 2.3, 'ENBR3': 1.15, 'ALUP11': 1.6, 'TAEE11': 2.1,
                        'VIVT3': 2.5, 'VALE3': 4, 'SIMH3': 0.2}
     else:
         empresasdiv = {'VBBR3': 1.3, 'BBSE3': 1.7, 'PSSA3': 1.3}
