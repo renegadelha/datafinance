@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="41dfb446-12c4-4564-b7e5-e7a0a7c72a90" name="Default Changelist" comment="adicionei duas novas pages">
+    <list default="true" id="41dfb446-12c4-4564-b7e5-e7a0a7c72a90" name="Default Changelist" comment="modifiquei o preco teto">
+      <change afterPath="$PROJECT_DIR$/pages/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/firstPage.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/secondPage.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test7B.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analisador/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/analisador/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/stylesheet.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/stylesheet.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphViewer/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphViewer/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test7.py" beforeDir="false" afterPath="$PROJECT_DIR$/test7.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,14 +95,14 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
-    &quot;last_opened_file_path&quot;: &quot;D:/pythonProjects/datafinancerene/data&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/pythonProjects/datafinancerene&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\pythonProjects\datafinancerene\data" />
       <recent name="D:\pythonProjects\datafinancerene" />
+      <recent name="D:\pythonProjects\datafinancerene\data" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\pythonProjects\datafinancerene\data" />
@@ -270,7 +278,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676032604446</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="modifiquei o preco teto">
+      <created>1676034763569</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1676034763569</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -312,7 +327,8 @@
     </ignored-roots>
     <MESSAGE value="modifiquei a funcao de processar dados" />
     <MESSAGE value="adicionei duas novas pages" />
-    <option name="LAST_COMMIT_MESSAGE" value="adicionei duas novas pages" />
+    <MESSAGE value="modifiquei o preco teto" />
+    <option name="LAST_COMMIT_MESSAGE" value="modifiquei o preco teto" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/test5.py">
