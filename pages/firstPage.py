@@ -8,16 +8,13 @@ from dash.dependencies import Input, Output
 import plotly.express as px
 import graphViewer as gv
 
-
 def gerarTable(tdiv, valor):
     dadosTable = analisador.distribuirAporte(tdiv.copy(), valor)
     dadosTable.reset_index(inplace=True)
     return dadosTable
 
-
 def gerarTdiv(option, csv):
     return analisador.processarAnalise(csv, option)
-
 
 def viewTableAll(tdiv):
     tdiv = tdiv[tdiv['margemGordon'] > -5]
