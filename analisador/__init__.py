@@ -258,7 +258,7 @@ def processarAnalise(dados, option):
         empresasdiv = {'VBBR3': 0.9, 'BBSE3': 1.8, 'PSSA3': 1.3, 'BRSR6': 0.6,
                        'BBAS3': 2.2, 'ITSA4': 0.5, 'EGIE3': 2.3, 'ENBR3': 1.15, 'ALUP11': 1.6, 'TAEE11': 2.1}
     elif option == 4:
-        empresasdiv = {'VBBR3': 0.9, 'BBSE3': 1.8, 'PSSA3': 1.3, 'BRSR6': 0.6,
+        empresasdiv = {'VBBR3': 0.9, 'BBSE3': 1.8, 'PSSA3': 1.3, 'BRSR6': 0.6, 'KLBN11':1.2,
                        'BBAS3': 2.2, 'ITSA4': 0.5, 'EGIE3': 2.3, 'ENBR3': 1.15, 'ALUP11': 1.6, 'TAEE11': 2.1,
                        'VIVT3': 2.5, 'VALE3': 4, 'SIMH3': 0.3}
     else:
