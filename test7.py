@@ -161,7 +161,7 @@ def update_tdiv_and_graph(n_clicks, value, radiovalue):
     global figura
     global data_cias
     if value == 'rnsg':
-        tdiv = tdiv[tdiv['margemGordon'] > -5]
+        tdiv = tdiv[tdiv['margemGordon'] > -10]
         tdiv = gerarTdiv(int(radiovalue), data_cias)
 
         #manipulatecsv.testarArquivo(f'{actual_dir}/data/teste.txt')
