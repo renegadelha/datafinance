@@ -255,11 +255,11 @@ def processarAnalise(dados, option):
         empresasdiv = {'VBBR3': 0.9, 'BBSE3': 1.9, 'BRSR6': 0.6,
                        'BBAS3': 2.3, 'ITSA4': 0.5}
     elif option == 3:
-        empresasdiv = {'VBBR3': 0.9, 'BBSE3': 1.9, 'PSSA3': 1.3, 'BRSR6': 0.6,
-                       'BBAS3': 2.3, 'ITSA4': 0.5, 'EGIE3': 2.3, 'ENBR3': 1.15, 'ALUP11': 1.6, 'TAEE11': 2.1}
+        empresasdiv = {'VBBR3': 0.9, 'BBSE3': 1.9, 'PSSA3': 1.3, 'BRSR6': 0.6, 'KLBN11':1.2,
+                       'BBAS3': 2.2, 'ITSA4': 0.5, 'EGIE3': 2.3, 'ALUP11': 1.6, 'TAEE11': 2.1}
     elif option == 4:
         empresasdiv = {'VBBR3': 0.9, 'BBSE3': 1.9, 'PSSA3': 1.3, 'BRSR6': 0.6, 'KLBN11':1.2,
-                       'BBAS3': 2.3, 'ITSA4': 0.5, 'EGIE3': 2.3, 'ENBR3': 1.15, 'ALUP11': 1.6, 'TAEE11': 2.1,
+                       'BBAS3': 2.3, 'ITSA4': 0.5, 'EGIE3': 2.3, 'ALUP11': 1.6, 'TAEE11': 2.1,
                        'VIVT3': 2.5, 'VALE3': 4, 'SIMH3': 0.3}
     else:
         empresasdiv = {'VBBR3': 0.9, 'BBSE3': 1.8, 'PSSA3': 1.3}
@@ -307,7 +307,7 @@ def capturarTweets(stocks):
     api = tw.API(auth, wait_on_rate_limit=True)
 
     if str(stocks[0]) == 'Todos':
-        stocks = ['SIMH3', 'EGIE3', 'ALUP11', 'TAEE11', 'ENBR3', 'BBSE3', 'PSSA3', 'VBBR3', 'ITSA4', 'BBAS3', 'BRSR6', 'JBSS3', 'VIVT3', 'JHSF3']
+        stocks = ['SIMH3', 'EGIE3', 'ALUP11', 'TAEE11', 'KLBN11', 'BBSE3', 'PSSA3', 'VBBR3', 'ITSA4', 'BBAS3', 'BRSR6', 'VIVT3', 'JHSF3']
 
     busca = str(stocks[0])
     for n in range(1, len(stocks)):

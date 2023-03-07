@@ -5,7 +5,7 @@ import numpy as np
 
 def generateGraphMonth(tempo):
 
-    stocks = ['brsr6.sa', 'bbas3.sa', 'VBBR3.sa', 'bbse3.sa', 'pssa3.sa', 'itsa4.sa','taee11.sa', 'egie3.sa', 'enbr3.sa', 'alup11.sa', 'vivt3.sa', 'simh3.sa' ]
+    stocks = ['brsr6.sa', 'bbas3.sa', 'VBBR3.sa', 'bbse3.sa', 'pssa3.sa', 'itsa4.sa','taee11.sa', 'egie3.sa', 'klbn11.sa', 'alup11.sa', 'vivt3.sa', 'simh3.sa' ]
     if tempo == 'diário':
         data = yf.download(stocks, period='2d')
     elif tempo == '30 dias':
